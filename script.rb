@@ -9,6 +9,14 @@
 #2a + 1b = FH
 #1a + 2b = FV 
 #2^2^2/ 2left/right * 1up/down, 2up/down * 1left/right
+#we could try all 8. -> 8*8*8*8...
+
+#2right_main + 2left_main + 1right_sub + 1left_sub = FH
+#2up_main + 2down_main + 1up_sub + 1down_sub = FV
+#=>possible combinations/
+#up_main + down_main = right_sub + left_sub/ right_main + left_main = up_sub + down_sub
+#
+#another method, try and error. move 2right 1up, if ==, done./ move 2r 1u, if new_x >2, move 2r. etc.
 
 def knight_moves(initial_pos,final_pos)
     
