@@ -34,7 +34,19 @@
 #7 - 2*3 = 1 = M
 #means three S moves (2vertically + 1horizontally) and one M move (2horizontally + 1vertically)
 #
+##2right_main - 2left_main + 1right_sub - 1left_sub = FH
+#2up_main - 2down_main + 1up_sub - 1down_sub = FV
+#=>possible combinations/
 #
+#right_main + left_main = up_sub + down_sub, but right_main - left_main != right_sub - left_sub
+#right_sub + left_sub = up_main + down_main, but right_sub - left_sub != up_main + down_main
+
+#2right_main - 2left_main + 1right_sub - 1left_sub + 2up_main - 2down_main + 1up_sub - 1down_sub = FH + FV
+#1right_main + 1left_main + 1right_sub + 1left_sub - up_sub - down_sub - up_main - down_main = 0
+
+#a,b,c,d,e,f,g,h/ / 2a -2b +c -d = FH/ 2e -2f +g -h = FV/ a+b=g+h/ c+d=e+f
+
+
 #
 #another method, try and error. move 2right 1up, if ==, done./ move 2r 1u, if new_x >2, move 2r. etc.
 
@@ -56,7 +68,7 @@ def knight_moves(initial_pos,final_pos)
 
 end
 
-knight_moves([1,3],[4,7])
+knight_moves([0,0],[5,7])
 
   
 
