@@ -33,6 +33,9 @@
 #(14-5)/3 = 3 = S
 #7 - 2*3 = 1 = M
 #means three S moves (2vertically + 1horizontally) and one M move (2horizontally + 1vertically)
+#
+#
+#
 #another method, try and error. move 2right 1up, if ==, done./ move 2r 1u, if new_x >2, move 2r. etc.
 
 def knight_moves(initial_pos,final_pos)
@@ -44,6 +47,12 @@ def knight_moves(initial_pos,final_pos)
   vertically = new_y - y
   
   puts [horizontally, vertically]
+  puts ""
+
+  s_move = (2*vertically - horizontally)/3
+  m_move = vertically - 2*s_move
+
+  puts [s_move,m_move]
 
 end
 
