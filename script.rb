@@ -11,11 +11,28 @@
 #2^2^2/ 2left/right * 1up/down, 2up/down * 1left/right
 #we could try all 8. -> 8*8*8*8...
 
-#2right_main + 2left_main + 1right_sub + 1left_sub = FH
-#2up_main + 2down_main + 1up_sub + 1down_sub = FV
+#2right_main - 2left_main + 1right_sub - 1left_sub = FH
+#2up_main - 2down_main + 1up_sub - 1down_sub = FV
 #=>possible combinations/
 #up_main + down_main = right_sub + left_sub/ right_main + left_main = up_sub + down_sub
 #
+#right_main + left_main = up_sub + down_sub
+#right_sub + left_sub = up_main + down_main
+#
+#given ([0,0],[5,7])
+#S=2up/down and 1 left/right
+#M=2left/right and 1 up/down
+#2M + 1S = FH
+#2S + 1M = FV
+#1M = FV - 2S
+#2FV -4S + 1S = FH
+#2FV - FH = 3S
+#(2FV-FH)/3 = S
+#
+#FH=5,FV=7
+#(14-5)/3 = 3 = S
+#7 - 2*3 = 1 = M
+#means three S moves (2vertically + 1horizontally) and one M move (2horizontally + 1vertically)
 #another method, try and error. move 2right 1up, if ==, done./ move 2r 1u, if new_x >2, move 2r. etc.
 
 def knight_moves(initial_pos,final_pos)
