@@ -31,4 +31,11 @@ def knight_moves(start_pos, end_pos)
 end
 
 
-knight_moves([3,4],[3,5])
+puts "Welcome to knight move simulator!\n\n"
+puts "Input the starting position ([0,0] to [7,7])"
+start_pos = gets.chomp.gsub(/[^\d,]/, '').split(',').map(&:to_i)
+puts "Input the ending position ([0,0] to [7,7]"
+end_pos = gets.chomp.gsub(/[^\d,]/, '').split(',').map(&:to_i)
+
+knight_moves(start_pos,end_pos)
+
