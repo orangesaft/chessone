@@ -1,92 +1,29 @@
-#take initial position, and final position
-#count how far it has to travel both horizontally and vertically
-#use the fact that we always have to travel either 2 horizontally AND 1 vertically or 1 horizontally AND 2 vertically by the rule
-#we can have both positive and negative values, to the right and to the left/ upward and downward
-#divide by 2 unil the remainder is either 1 or 0// two equations like -> 2h + 1v = C, 1h + 2v = D// or maybe just don't 
-## H = 2 // FH = 4
-# V = 3 + 0.5 // FV = 7
+require 'set'
 
-#2a + 1b = FH
-#1a + 2b = FV 
-#2^2^2/ 2left/right * 1up/down, 2up/down * 1left/right
-#we could try all 8. -> 8*8*8*8...
-
-#2right_main - 2left_main + 1right_sub - 1left_sub = FH
-#2up_main - 2down_main + 1up_sub - 1down_sub = FV
-#=>possible combinations/
-#up_main + down_main = right_sub + left_sub/ right_main + left_main = up_sub + down_sub
-#
-#right_main + left_main = up_sub + down_sub
-#right_sub + left_sub = up_main + down_main
-#
-#given ([0,0],[5,7])
-#S=2up/down and 1 left/right
-#M=2left/right and 1 up/down
-#2M + 1S = FH
-#2S + 1M = FV
-#1M = FV - 2S
-#2FV -4S + 1S = FH
-#2FV - FH = 3S
-#(2FV-FH)/3 = S
-#
-#FH=5,FV=7
-#(14-5)/3 = 3 = S
-#7 - 2*3 = 1 = M
-#means three S moves (2vertically + 1horizontally) and one M move (2horizontally + 1vertically)
-#
-##2right_main - 2left_main + 1right_sub - 1left_sub = FH
-#2up_main - 2down_main + 1up_sub - 1down_sub = FV
-#=>possible combinations/
-#
-#right_main + left_main = up_sub + down_sub, but right_main - left_main != right_sub - left_sub
-#right_sub + left_sub = up_main + down_main, but right_sub - left_sub != up_main + down_main
-
-#2right_main - 2left_main + 1right_sub - 1left_sub + 2up_main - 2down_main + 1up_sub - 1down_sub = FH + FV
-#1right_main + 1left_main + 1right_sub + 1left_sub - up_sub - down_sub - up_main - down_main = 0
-
-#a,b,c,d,e,f,g,h/ / 2a -2b +c -d = FH/ 2e -2f +g -h = FV/ a+b=g+h/ c+d=e+f
-
-
-#
-#another method, try and error. move 2right 1up, if ==, done./ move 2r 1u, if new_x >2, move 2r. etc.
-
-def knight_moves(initial_pos,final_pos)
-    
-  x, y = initial_pos
-  new_x, new_y = final_pos
-  
-  horizontally = new_x - x 
-  vertically = new_y - y
-
+def knight_moves(start_pos, end_pos)
   moves = [
-    [2,1], [2,-1], [-2,1], [-2,-1], 
-    [1,2], [1,-2], [-1,2], [-1,-2]
+    [2, 1], [2, -1], [-2, 1], [-2, -1],
+    [1, 2], [1, -2], [-1, 2], [-1, -2]
   ]
 
-  queue = [[initial_pos,0]]
-
-  visited = Set.new
-  visited.add(initial_pos)
+  # BFS setup
+  queue = [[start_pos, 0]] # Start with initial position and 0 moves
+  visited = Set.new        # To track visited positions
+  visited.add(start_pos)   # Mark starting position as visited
 
   until queue.empty?
-    initial_pos, steps = queue.shift
-    x, y = initial_pos
+    current_pos, steps = queue.shift # Get the current position and 
+    return puts steps if current_pos == end_pos # If target is reached, return steps
 
-    return steps if initial_pos == final_pos
+    moves.each do |dx, dy|
+      new_pos = [current_pos[0] + dx, current_pos[1] + dy]
+      if new_pos.all? { |coord| coord.between?(0, 7) } && !visited.include?(new_pos)
+        queue << [new_pos, steps + 1] # Add to queue with steps incremented
+        visited.add(new_pos)          # Mark as visited
+      end
+    end
   end
-
-  
-  puts [horizontally, vertically]
-  puts ""
-
-  s_move = (2*vertically - horizontally)/3
-  m_move = vertically - 2*s_move
-
-  puts [s_move,m_move]
-
 end
 
-knight_moves([0,0],[5,7])
 
-  
-
+knight_moves([3,4],[3,5])
