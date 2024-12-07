@@ -57,6 +57,24 @@ def knight_moves(initial_pos,final_pos)
   
   horizontally = new_x - x 
   vertically = new_y - y
+
+  moves = [
+    [2,1], [2,-1], [-2,1], [-2,-1], 
+    [1,2], [1,-2], [-1,2], [-1,-2]
+  ]
+
+  queue = [[initial_pos,0]]
+
+  visited = Set.new
+  visited.add(initial_pos)
+
+  until queue.empty?
+    initial_pos, steps = queue.shift
+    x, y = initial_pos
+
+    return steps if initial_pos == final_pos
+  end
+
   
   puts [horizontally, vertically]
   puts ""
